@@ -1,1 +1,2 @@
-# gofit
+
+![Logo](logo.jpg)
