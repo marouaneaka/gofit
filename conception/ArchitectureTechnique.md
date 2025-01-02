@@ -125,20 +125,24 @@ graph TD
 ---
 
 #### Service d’Activités
-#### Service des Objectifs
-#### Service de Notifications
-#### Service de Statistiques
-#### Diagramme de flux de données
+1. L'utilisateur commence par saisir les détails de son activité dans l'interface mobile ou web.
+
+2. Le frontend transforme cette saisie en une requête POST structurée et l'envoie au Service d'Activités. Cette requête contient toutes les informations nécessaires comme le type d'activité, la durée, les calories, etc.
+
+3. Le Service d'Activités effectue deux actions importantes en parallèle :
+   - Il persiste les données dans la base de données SQLite pour un stockage permanent
+   - Il publie un événement sur Kafka pour informer les autres services de cette nouvelle activité
+
+4. Une fois ces opérations terminées, une confirmation est renvoyée à l'utilisateur à travers l'interface.
+
 ```mermaid
 sequenceDiagram
     participant User as Utilisateur
-    participant Front as Frontend (Mobile/Web)
+    participant Front as Frontend (Web)
     participant AS as Service d'Activités
     participant DB as Base de Données SQLite
     participant Kafka as Message Broker Kafka
-    participant GS as Service d'Objectifs
-    participant NS as Service de Notifications
-    participant FCM as Firebase Cloud Messaging
+
     
     %% Flux d'enregistrement d'activité
     rect rgb(38, 61, 81)
@@ -151,6 +155,31 @@ sequenceDiagram
         AS-->>-Front: 201 Created
         Front-->>User: Affiche confirmation
     end
+```
+#### Service des Objectifs
+#### Service de Notifications
+1. Le Service d'Objectifs analyse régulièrement les progrès par rapport aux objectifs fixés.
+
+2. Lorsqu'un objectif est atteint, il publie immédiatement un événement sur Kafka.
+
+3. Le Service de Notifications, qui écoute en permanence ces événements :
+   - Capture l'événement "goal.achieved"
+   - Le transforme en notification appropriée
+   - L'envoie au Front
+
+4. Le Front affiche la notification à l'utilisateur.
+
+
+```mermaid
+sequenceDiagram
+    participant User as Utilisateur
+    participant Front as Frontend (Web)
+
+    participant Kafka as Message Broker Kafka
+    participant GS as Service d'Objectifs
+    participant NS as Service de Notifications
+
+    
     
     %% Flux de notification d'objectif atteint
     rect rgb(108, 92, 73)
@@ -158,10 +187,18 @@ sequenceDiagram
         GS->>GS: Vérifie objectifs
         GS->>Kafka: Publie "goal.achieved"
         Kafka-->>NS: Consomme événement
-        NS->>FCM: Envoie notification push
-        FCM-->>User: Reçoit notification
+        NS->>Front: Envoie notification push
+        Front-->>User: Reçoit notification
     end
 ```
+#### Service de Statistiques
+
+
+
+
+
+
+
 ### Choix Technologiques
 ### Deploiement
 ## Front-End
