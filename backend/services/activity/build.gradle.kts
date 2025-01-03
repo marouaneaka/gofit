@@ -26,3 +26,6 @@ dependencies {
 
 }
 
+tasks.war {
+    enabled = true
+}

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/activities")
 public class ActivityController {
@@ -17,5 +19,18 @@ public class ActivityController {
     public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) {
         Activity savedActivity = service.saveActivity(activity);
         return ResponseEntity.status(201).body(savedActivity);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Activity> updateActivity(@PathVariable Long id, @RequestBody Activity activity) {
+        Optional<Activity> updatedActivity = service.updateActivity(id, activity);
+        return updatedActivity.map(ResponseEntity::ok)
+                              .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteActivity(@PathVariable Long id) {
+        boolean deleted = service.deleteActivity(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 }
