@@ -8,7 +8,7 @@
 
 rootProject.name = "services"
 
-include("services:activity")
-include("services:goals")
-include("services:notifications")
-include("services:statistics")
+include("activity")
+//include("goals")
+//include("notifications")
+//include("statistics")
