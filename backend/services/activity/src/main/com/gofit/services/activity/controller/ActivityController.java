@@ -1,7 +1,7 @@
-package gofit.services.activity.controller;
+package com.gofit.services.activity.controller;
 
-import gofit.services.activity.model.Activity;
-import gofit.services.activity.service.ActivityService;
+import com.gofit.services.activity.model.Activity;
+import com.gofit.services.activity.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/activities")
+@RequestMapping("/activity/api")
 public class ActivityController {
 
     @Autowired
     private ActivityService service;
-
+    
+    @GetMapping
+    public String mainRequest() {
+        return "GoFit Activity Microservice";
+    }
     @PostMapping
     public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) {
         Activity savedActivity = service.saveActivity(activity);

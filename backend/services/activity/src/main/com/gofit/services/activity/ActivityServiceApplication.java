@@ -1,4 +1,4 @@
-package gofit.services.activity;
+package com.gofit.services.activity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

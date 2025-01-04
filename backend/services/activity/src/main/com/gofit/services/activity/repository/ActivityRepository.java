@@ -1,6 +1,6 @@
-package gofit.services.activity.repository;
+package com.gofit.services.activity.repository;
 
-import gofit.services.activity.model.Activity;
+import com.gofit.services.activity.model.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ActivityRepository extends JpaRepository<Activity, Long> {

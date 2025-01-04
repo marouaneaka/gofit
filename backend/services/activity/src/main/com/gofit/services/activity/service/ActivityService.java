@@ -1,7 +1,7 @@
-package gofit.services.activity.service;
+package com.gofit.services.activity.service;
 
-import gofit.services.activity.model.Activity;
-import gofit.services.activity.repository.ActivityRepository;
+import com.gofit.services.activity.model.Activity;
+import com.gofit.services.activity.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

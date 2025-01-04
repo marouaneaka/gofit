@@ -1,4 +1,4 @@
-package gofit.services.activity.model;
+package com.gofit.services.activity.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
