@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "gofit.services"
-version = "1.0.0-SNAPSHOT"
+version = "service"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -23,6 +23,7 @@ dependencies {
     providedCompile("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
     // Kafka Client
     implementation("org.apache.kafka:kafka-clients:3.5.0")
+    implementation("org.springframework.kafka:spring-kafka:2.9.0")
     // Spring Boot Starter Tomcat
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
