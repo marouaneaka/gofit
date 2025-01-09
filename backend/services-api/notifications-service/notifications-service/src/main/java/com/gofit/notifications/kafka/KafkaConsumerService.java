@@ -1,4 +1,4 @@
-package com.gofit.notifications.consumer;
+package com.gofit.notifications.kafka;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
