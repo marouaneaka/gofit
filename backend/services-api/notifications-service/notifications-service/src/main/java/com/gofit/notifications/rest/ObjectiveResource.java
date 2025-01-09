@@ -1,8 +1,8 @@
-package com.gofit.objectives.rest;
+package com.gofit.notifications.rest;
 
-import com.gofit.objectives.kafka.KafkaProducerService;
-import com.gofit.objectives.model.Objective;
-import com.gofit.objectives.repository.ObjectiveRepository;
+import com.gofit.notifications.kafka.KafkaProducerService;
+import com.gofit.notifications.model.Objective;
+import com.gofit.notifications.repository.ObjectiveRepository;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -21,9 +21,9 @@ public class ObjectiveResource {
     private KafkaProducerService kafkaProducerService;
 
     @GET
-    public Response getAllObjectives() {
-        List<Objective> objectives = objectiveRepository.findAll();
-        return Response.ok(objectives).header("Cache-Control", "no-cache, no-store, must-revalidate")
+    public Response getAllnotifications() {
+        List<Objective> notifications = objectiveRepository.findAll();
+        return Response.ok(notifications).header("Cache-Control", "no-cache, no-store, must-revalidate")
                    .header("Pragma", "no-cache")
                    .header("Expires", "0")
                    .build();
@@ -48,7 +48,7 @@ public class ObjectiveResource {
         objectiveRepository.save(objective);
 
         // Produire un événement Kafka
-        kafkaProducerService.sendMessage("objectives-events", null, "New objective created: " + objective);
+        kafkaProducerService.sendMessage("notifications-events", null, "New objective created: " + objective);
 
         return Response.status(Response.Status.CREATED).entity(objective).build();
     }
@@ -66,7 +66,7 @@ public class ObjectiveResource {
         objectiveRepository.update(existingObjective);
 
         // Produire un événement Kafka
-        kafkaProducerService.sendMessage("objectives-events", null, "Objective updated: " + existingObjective);
+        kafkaProducerService.sendMessage("notifications-events", null, "Objective updated: " + existingObjective);
 
         return Response.ok(existingObjective).build();
     }
@@ -82,7 +82,7 @@ public class ObjectiveResource {
         objectiveRepository.delete(id);
 
         // Produire un événement Kafka
-        kafkaProducerService.sendMessage("objectives-events", null, "Objective deleted with ID: " + id);
+        kafkaProducerService.sendMessage("notifications-events", null, "Objective deleted with ID: " + id);
 
         return Response.noContent().build();
     }

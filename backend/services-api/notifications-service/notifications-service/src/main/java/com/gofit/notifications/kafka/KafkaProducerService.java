@@ -1,6 +1,6 @@
-package com.gofit.objectives.kafka;
+package com.gofit.notifications.kafka;
 
-import com.gofit.objectives.config.KafkaConfig;
+import com.gofit.notifications.config.KafkaConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 

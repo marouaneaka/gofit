@@ -1,6 +1,6 @@
-package com.gofit.objectives.repository;
+package com.gofit.notifications.repository;
 
-import com.gofit.objectives.model.Objective;
+import com.gofit.notifications.model.Objective;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,7 +9,7 @@ import java.util.List;
 @Stateless
 public class ObjectiveRepository {
 
-    @PersistenceContext(unitName = "objectivesPU")
+    @PersistenceContext(unitName = "notificationsPU")
     private EntityManager entityManager;
 
     public void save(Objective objective) {

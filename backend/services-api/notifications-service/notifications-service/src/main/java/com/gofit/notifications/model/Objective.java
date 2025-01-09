@@ -1,11 +1,11 @@
-package com.gofit.objectives.model;
+package com.gofit.notifications.model;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "objectives")
+@Table(name = "notifications")
 public class Objective {
 
     @Id

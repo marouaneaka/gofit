@@ -1,14 +1,14 @@
-package com.gofit.objectives.service;
+package com.gofit.notifications.service;
 
-import com.gofit.objectives.model.Objective;
-import com.gofit.objectives.repository.ObjectiveRepository;
+import com.gofit.notifications.model.Objective;
+import com.gofit.notifications.repository.ObjectiveRepository;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 
 import java.util.List;
 
 @Stateless
-public class ObjectiveService {
+public class notificationservice {
 
     @Inject
     private ObjectiveRepository repository;
@@ -21,7 +21,7 @@ public class ObjectiveService {
         return repository.findById(id);
     }
 
-    public List<Objective> getAllObjectives() {
+    public List<Objective> getAllnotifications() {
         return repository.findAll();
     }
 }

@@ -6,11 +6,11 @@
                         https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
     version="3.0">
 
-    <persistence-unit name="objectivesPU" transaction-type="JTA">
+    <persistence-unit name="notificationsPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/objectivesDB</jta-data-source>
+        <jta-data-source>jdbc/notificationsDB</jta-data-source>
         
-        <class>com.gofit.objectives.model.Objective</class>
+        <class>com.gofit.notifications.model.Objective</class>
 
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" value="update"/>

@@ -11,19 +11,19 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.gofit.objectives.rest</param-value>
+            <param-value>com.gofit.notifications.rest</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
-        <url-pattern>/objectives/*</url-pattern>
+        <url-pattern>/notifications/*</url-pattern>
     </servlet-mapping>
 
     <filter>
         <filter-name>CORSFilter</filter-name>
-        <filter-class>com.gofit.objectives.config.CORSFilter</filter-class>
+        <filter-class>com.gofit.notifications.config.CORSFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CORSFilter</filter-name>

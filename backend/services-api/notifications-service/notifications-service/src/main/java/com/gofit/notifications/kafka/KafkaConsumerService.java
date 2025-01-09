@@ -1,4 +1,4 @@
-package com.gofit.objectives.consumer;
+package com.gofit.notifications.consumer;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -14,8 +14,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gofit.objectives.config.KafkaConfig;
-import com.gofit.objectives.model.Objective;
+import com.gofit.notifications.config.KafkaConfig;
+import com.gofit.notifications.model.Objective;
 import com.gofit.shared.ActivityEvent;
 
 import java.time.Duration;
@@ -29,7 +29,7 @@ import java.time.Instant;
 @Startup
 public class KafkaConsumerService {
 
-    @PersistenceContext(unitName = "objectivesPU")
+    @PersistenceContext(unitName = "notificationsPU")
     private EntityManager entityManager;
 
     private KafkaConsumer<String, String> consumer;
@@ -88,9 +88,9 @@ public class KafkaConsumerService {
             ActivityEvent event = objectMapper.readValue(eventJson, ActivityEvent.class);
             System.out.println("Deserialized event: " + event);
 
-            updateObjectives("distance", event.getDistance());
-            updateObjectives("duration", event.getDuration());
-            updateObjectives("calories", event.getCalories());
+            updatenotifications("distance", event.getDistance());
+            updatenotifications("duration", event.getDuration());
+            updatenotifications("calories", event.getCalories());
         } catch (Exception e) {
             System.err.println("Error processing event: " + e.getMessage());
             e.printStackTrace();
@@ -100,18 +100,18 @@ public class KafkaConsumerService {
     /**
      * Mettre à jour les objectifs correspondants (colonne `goalType` = distance/duration/calories, etc.).
      */
-    private void updateObjectives(String goalType, double valueToAdd) {
+    private void updatenotifications(String goalType, double valueToAdd) {
         if (valueToAdd <= 0) return;
 
         // Chargement des objectifs correspondants
-        List<Objective> objectives = entityManager.createQuery(
+        List<Objective> notifications = entityManager.createQuery(
                 "SELECT o FROM Objective o WHERE o.goalType = :goalType AND o.status = :status", Objective.class)
                 .setParameter("goalType", goalType)
                 .setParameter("status", "IN_PROGRESS")
                 .getResultList();
 
         // Mise à jour de la valeur courante
-        for (Objective objective : objectives) {
+        for (Objective objective : notifications) {
             objective.setCurrentValue(objective.getCurrentValue() + valueToAdd);
 
             // Si la valeur courante atteint ou dépasse la cible, on marque l'objectif comme terminé
