@@ -49,6 +49,26 @@ main {
   transition: font-size 0.3s ease-in, color 0.3s ease-in;
 }
 
+.navbar-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navbar-btn {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in, transform 0.3s ease-in;
+}
+
+.navbar-btn:hover {
+  background-color: #5bb015;
+  transform: scale(1.05);
+}
+
 .navbar-menu {
   list-style: none;
   display: flex;

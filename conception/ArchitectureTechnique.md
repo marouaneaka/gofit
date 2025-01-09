@@ -1,6 +1,11 @@
- <img src="img/logo.jpg" alt="Logo" width="100" height="100">
+---
+title: "Architecture Technique"
+author: "Belbella Marouane"
+---
 
- -----
+<img src="img/logo.jpg" alt="Logo" width="100" height="100">
+
+
 # Dossier d’Architecture Technique
 ## Introduction
 Ce document présente l’architecture technique de l’application de suivi de fitness, décrivant les choix technologiques, les diagrammes de flux de données, les spécifications des composants, et la manière dont elle sera déployée.
@@ -27,7 +32,7 @@ Les principaux microservices sont :
 
 Afin de visualiser clairement la structure du projet, ci-dessous un schéma d'organisation des fichiers du backend 
 
----
+
 
 #### 1. **Structure principale**
 ```mermaid
@@ -41,14 +46,14 @@ graph TD
     
 ```
 
----
+
 
 
 
 #### 2. **Module commun**
 ```mermaid
 graph TD
-    common[common-module]
+    common[shared-models]
     common --> src[src]
     common --> target[target]
     common --> pom.xml[pom.xml]
@@ -57,7 +62,7 @@ graph TD
 
 ```
 
----
+
 
 #### 3. **Services**
 ```mermaid
@@ -68,19 +73,20 @@ graph TD
     D --> E[main]
     E --> F[java]
     F --> G[com]
-    G --> H[example]
+    G --> H[gofits]
     H --> I[activities]
     I --> J[repository]
     I --> K[model]
-    I --> L[service]
-    I --> M[controller]
+    I --> L[kafka]
+    I --> L[rest]
+    I --> M[config]
     E --> N[resources]
     N --> O[META-INF]
     O --> P[persistence.xml]
     A --> Q[pom.xml]
 ```
 
----
+
 ### Choix Technologiques
 
 - **Jakarta EE 10** : Framework principal
@@ -92,7 +98,7 @@ graph TD
 - **PostgreSQL 15** : Base de données relationnelle
 - **Apache Kafka** : Message broker pour la communication inter-services
 
----
+
 
 #### Service d’Activités
 
@@ -382,36 +388,28 @@ erDiagram
 - **Message Broker** : Apache Kafka 3.4
 
 
-### Scripts de Déploiement
-```bash
-#!/bin/bash
-# deploy.sh
-mvn clean package
-## Front-End
-### Technologies Utilisées
-- **HTML5** : Structure des pages
-- **CSS3** avec Flexbox et Grid
-- **JavaScript** (ES6+)
-  - Fetch API pour les appels REST
-  - WebSocket pour les notifications temps réel
-  - LocalStorage pour le cache local
-```
+### Déploiement
+[mise_en_place](mise_en_place.md)
 ### Structure du Front-End
-```
+```plaintext
 frontend/
 ├── assets/
-│   ├── css/
-│   │   ├── style.css
-│   │   └── components/
-│   ├── js/
-│   │   ├── main.js
-│   │   └── services/
-│   └── images/
-├── components/
-│   ├── activity/
-│   ├── goals/
-│   └── stats/
-└── index.html
+│   ├── favicon.ico
+│   └── logo.jpg
+├── css/
+│   └── styles.css
+├── js/
+│   ├── activities.js
+│   ├── main.js
+│   ├── notifications.js
+│   ├── objectives.js
+│   └── statistics.js
+├── activities.html
+├── index.html
+├── navbar.html
+├── notifications.html
+├── objectives.html
+└── statistics.html
 ```
 
 ### Exemple de Service JavaScript
