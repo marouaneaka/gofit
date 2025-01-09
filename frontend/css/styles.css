@@ -1,0 +1,219 @@
+/* css/styles.css */
+
+/* Styles de base */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 20px;
+}
+
+/* Barre de navigation */
+.navbar {
+  background-color: #525D76;
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  margin-left: 20px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: #FFD700; /* Or pour le lien actif */
+  border-bottom: 2px solid #FFD700;
+}
+
+/* Styles pour les pages */
+h1 {
+  text-align: center;
+  color: #333333;
+}
+
+h2 {
+  color: #333333;
+  margin-top: 40px;
+}
+
+p {
+  text-align: center;
+  color: #666666;
+}
+
+/* Styles pour les tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #dddddd;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Styles pour les boutons */
+.btn {
+  padding: 8px 16px;
+  margin: 4px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336; /* Rouge */
+}
+
+.delete-btn:hover {
+  background-color: #da190b;
+}
+
+/* Styles pour les formulaires */
+.form-container {
+  border: 1px solid #ccc;
+  padding: 16px;
+  width: 300px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.form-container h3 {
+  text-align: center;
+  color: #333333;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container button {
+  width: 48%;
+  float: left;
+}
+
+.form-container button[type="button"] {
+  float: right;
+}
+
+/* Clear floats */
+.form-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Styles pour les messages d'erreur */
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#statisticsTable {
+  margin-top: 20px;
+}
+
+#statisticsTable th, #statisticsTable td {
+  text-align: center;
+}
+
+/* Styles pour les notifications */
+#notificationsList p {
+  font-size: 16px;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-left: 5px solid #4caf50; /* Bande verte à gauche */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#notificationsList p:before {
+  content: '🔔'; /* Icône de notification */
+  margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-menu {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .navbar-item {
+      margin: 10px 0;
+  }
+
+  .form-container {
+      width: 90%;
+  }
+
+  table, th, td {
+      font-size: 14px;
+  }
+}

@@ -1,0 +1,39 @@
+<!-- statistics.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>PulseTracker - Statistiques</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Conteneur pour la barre de navigation -->
+  <div id="navbar"></div>
+
+  <main>
+    <h1>Statistiques</h1>
+    <button class="btn" onclick="loadStatistics()">Charger les Statistiques</button>
+    <p id="statisticsError" class="error"></p>
+    <table id="statisticsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date de Calcul</th>
+          <th>Total Calories</th>
+          <th>Total Distance (km)</th>
+          <th>Total Durée (min)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les lignes seront insérées ici via JS -->
+      </tbody>
+    </table>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/statistics.js"></script>
+</body>
+</html>

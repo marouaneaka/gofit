@@ -1,0 +1,85 @@
+<!-- objectives.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>PulseTracker - Objectifs</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Conteneur pour la barre de navigation -->
+  <div id="navbar"></div>
+
+  <main>
+    <h1>Liste des Objectifs</h1>
+    <button class="btn" onclick="loadObjectives()">Charger les Objectifs</button>
+    <button class="btn" onclick="showCreateObjectiveForm()">Créer un Objectif</button>
+    <p id="objectivesError" class="error"></p>
+    <table id="objectivesTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type de Goal</th>
+          <th>Date de Début</th>
+          <th>Valeur Actuelle</th>
+          <th>Valeur Cible</th>
+          <th>Date de Fin</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les lignes seront insérées ici via JS -->
+      </tbody>
+    </table>
+
+    <!-- Formulaire de création d'objectif -->
+    <div id="createObjectiveForm" class="form-container" style="display:none;">
+      <h3>Créer un Nouvel Objectif</h3>
+      <form onsubmit="createObjective(event)">
+        <label for="objectiveGoalType">Type de Goal</label>
+        <select id="objectiveGoalType" name="objectiveGoalType" required>
+            <option value="" disabled selected>-- Sélectionnez un type --</option>
+            <option value="duration">Duration</option>
+            <option value="calories">Calories</option>
+            <option value="distance">Distance</option>
+        </select><br>
+        
+        <label for="objectiveTargetValue">Valeur Cible</label>
+        <input type="number" id="objectiveTargetValue" name="objectiveTargetValue" required><br>
+
+        <button type="submit" class="btn">Créer</button>
+        <button type="button" class="btn" onclick="hideCreateObjectiveForm()">Annuler</button>
+      </form>
+    </div>
+
+    <!-- Formulaire de mise à jour d'objectif -->
+    <div id="updateObjectiveForm" class="form-container" style="display:none;">
+      <h3>Modifier l'Objectif</h3>
+      <form onsubmit="updateObjective(event)">
+        <!-- Champ caché pour stocker l'ID de l'objectif -->
+        <input type="hidden" id="updateObjectiveId" name="updateObjectiveId">
+        
+        <label for="updateObjectiveGoalType">Type de Goal</label>
+        <select id="updateObjectiveGoalType" name="updateObjectiveGoalType" required>
+            <option value="duration">Duration</option>
+            <option value="calories">Calories</option>
+            <option value="distance">Distance</option>
+        </select><br>
+        
+        <label for="updateObjectiveTargetValue">Valeur Cible</label>
+        <input type="number" id="updateObjectiveTargetValue" name="updateObjectiveTargetValue" required><br>
+
+        <button type="submit" class="btn">Mettre à jour</button>
+        <button type="button" class="btn" onclick="hideUpdateObjectiveForm()">Annuler</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/objectives.js"></script>
+</body>
+</html>

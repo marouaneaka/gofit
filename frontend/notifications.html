@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>PulseTracker - Notifications</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Conteneur pour la barre de navigation -->
+  <div id="navbar"></div>
+
+  <main>
+    <h1>Notifications</h1>
+    <button class="btn" onclick="loadNotifications()">Charger les Notifications</button>
+    <div id="loadingIndicator" style="display: none;">Chargement...</div>
+    <p id="notificationsError" class="error"></p>
+    <div id="notificationsList">
+      <!-- Les messages seront insérés ici via JS -->
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

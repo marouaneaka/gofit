@@ -1,0 +1,18 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="2.1">
+    <persistence-unit name="statisticsPU">
+        <jta-data-source>jdbc/statisticsDB</jta-data-source>
+        <class>com.gofit.statistics.model.Statistic</class>
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="activitiesPU">
+        <jta-data-source>jdbc/activitiesDB</jta-data-source>
+        <class>com.gofit.activities.model.Activity</class>
+    </persistence-unit>
+    <persistence-unit name="objectivesPU">
+        <jta-data-source>jdbc/objectivesDB</jta-data-source>
+        <class>com.gofit.objectives.model.Objective</class>
+    </persistence-unit>
+</persistence>
