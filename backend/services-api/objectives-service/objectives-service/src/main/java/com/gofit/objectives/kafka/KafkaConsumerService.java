@@ -1,4 +1,4 @@
-package com.gofit.objectives.consumer;
+package com.gofit.objectives.kafka;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;

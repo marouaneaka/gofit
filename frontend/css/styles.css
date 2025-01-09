@@ -5,32 +5,48 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #1c1c1c;
+  color: white;
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
 }
 
 main {
   padding: 20px;
+  text-align: center; /* Center content in main */
+  transition: padding 0.3s ease-in;
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Space between logo and heading */
 }
 
 /* Barre de navigation */
 .navbar {
-  background-color: #525D76;
+  background-color: #242424;
   color: white;
   padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in, padding 0.3s ease-in;
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: justify-content 0.3s ease-in, align-items 0.3s ease-in;
 }
 
 .navbar-brand {
   font-size: 24px;
   text-decoration: none;
   color: white;
+  transition: font-size 0.3s ease-in, color 0.3s ease-in;
 }
 
 .navbar-menu {
@@ -38,39 +54,45 @@ main {
   display: flex;
   margin: 0;
   padding: 0;
+  transition: margin 0.3s ease-in, padding 0.3s ease-in;
 }
 
 .navbar-item {
   margin-left: 20px;
+  transition: margin-left 0.3s ease-in;
 }
 
 .navbar-link {
   text-decoration: none;
   color: white;
   font-size: 16px;
-  transition: color 0.3s;
+  transition: color 0.3s ease-in, font-size 0.3s ease-in;
 }
 
 .navbar-link:hover,
 .navbar-link.active {
-  color: #FFD700; /* Or pour le lien actif */
-  border-bottom: 2px solid #FFD700;
+  color: #69c617; /* Primary color for the active link */
+  border-bottom: 2px solid #69c617;
+  transition: color 0.3s ease-in, border-bottom 0.3s ease-in;
 }
 
 /* Styles pour les pages */
 h1 {
   text-align: center;
-  color: #333333;
+  color: #69c617; /* Primary color for headings */
+  transition: color 0.3s ease-in;
 }
 
 h2 {
-  color: #333333;
+  color: #69c617; /* Primary color for headings */
   margin-top: 40px;
+  transition: color 0.3s ease-in, margin-top 0.3s ease-in;
 }
 
 p {
   text-align: center;
-  color: #666666;
+  color: #cccccc; /* Light grey for paragraphs */
+  transition: color 0.3s ease-in;
 }
 
 /* Styles pour les tableaux */
@@ -78,23 +100,31 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: #242424;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: background-color 0.3s ease-in, margin-top 0.3s ease-in;
 }
 
 table, th, td {
-  border: 1px solid #dddddd;
+  border: 1px solid #444444;
+  transition: border 0.3s ease-in;
 }
 
 th, td {
   padding: 12px;
   text-align: left;
+  transition: padding 0.3s ease-in, text-align 0.3s ease-in;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #333333;
+  transition: background-color 0.3s ease-in;
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #2a2a2a;
+  transition: background-color 0.3s ease-in;
 }
 
 /* Styles pour les boutons */
@@ -102,19 +132,20 @@ tr:nth-child(even) {
   padding: 8px 16px;
   margin: 4px;
   border: none;
-  background-color: #4CAF50;
+  background-color: #69c617;
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease-in, padding 0.3s ease-in, margin 0.3s ease-in;
 }
 
 .btn:hover {
-  background-color: #45a049;
+  background-color: #5bb015;
 }
 
 .delete-btn {
   background-color: #f44336; /* Rouge */
+  transition: background-color 0.3s ease-in;
 }
 
 .delete-btn:hover {
@@ -123,23 +154,26 @@ tr:nth-child(even) {
 
 /* Styles pour les formulaires */
 .form-container {
-  border: 1px solid #ccc;
+  border: 1px solid #444444;
   padding: 16px;
   width: 300px;
   margin: 20px auto;
-  background-color: #f9f9f9;
+  background-color: #242424;
   border-radius: 8px;
+  transition: border 0.3s ease-in, padding 0.3s ease-in, margin 0.3s ease-in, background-color 0.3s ease-in;
 }
 
 .form-container h3 {
   text-align: center;
-  color: #333333;
+  color: #69c617; /* Primary color for headings */
+  transition: color 0.3s ease-in;
 }
 
 .form-container label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  transition: margin-bottom 0.3s ease-in;
 }
 
 .form-container input,
@@ -147,18 +181,23 @@ tr:nth-child(even) {
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #444444;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: #333333;
+  color: white;
+  transition: padding 0.3s ease-in, margin-bottom 0.3s ease-in, border 0.3s ease-in, background-color 0.3s ease-in, color 0.3s ease-in;
 }
 
 .form-container button {
   width: 48%;
   float: left;
+  transition: width 0.3s ease-in, float 0.3s ease-in;
 }
 
 .form-container button[type="button"] {
   float: right;
+  transition: float 0.3s ease-in;
 }
 
 /* Clear floats */
@@ -166,6 +205,7 @@ tr:nth-child(even) {
   content: "";
   clear: both;
   display: table;
+  transition: content 0.3s ease-in, clear 0.3s ease-in, display 0.3s ease-in;
 }
 
 /* Styles pour les messages d'erreur */
@@ -173,14 +213,17 @@ tr:nth-child(even) {
   color: red;
   text-align: center;
   margin-top: 10px;
+  transition: color 0.3s ease-in, text-align 0.3s ease-in, margin-top 0.3s ease-in;
 }
 
 #statisticsTable {
   margin-top: 20px;
+  transition: margin-top 0.3s ease-in;
 }
 
 #statisticsTable th, #statisticsTable td {
   text-align: center;
+  transition: text-align 0.3s ease-in;
 }
 
 /* Styles pour les notifications */
@@ -188,14 +231,17 @@ tr:nth-child(even) {
   font-size: 16px;
   margin: 10px 0;
   padding: 10px;
-  background-color: #f9f9f9;
-  border-left: 5px solid #4caf50; /* Bande verte à gauche */
+  background-color: #242424;
+  border-left: 5px solid #69c617; /* Primary color for the left border */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: font-size 0.3s ease-in, margin 0.3s ease-in, padding 0.3s ease-in, background-color 0.3s ease-in, border-left 0.3s ease-in, box-shadow 0.3s ease-in, border-radius 0.3s ease-in;
 }
 
 #notificationsList p:before {
   content: '🔔'; /* Icône de notification */
   margin-right: 10px;
+  transition: content 0.3s ease-in, margin-right 0.3s ease-in;
 }
 
 /* Responsive Design */
@@ -203,17 +249,21 @@ tr:nth-child(even) {
   .navbar-menu {
       flex-direction: column;
       align-items: center;
+      transition: flex-direction 0.3s ease-in, align-items 0.3s ease-in;
   }
 
   .navbar-item {
       margin: 10px 0;
+      transition: margin 0.3s ease-in;
   }
 
   .form-container {
       width: 90%;
+      transition: width 0.3s ease-in;
   }
 
   table, th, td {
       font-size: 14px;
+      transition: font-size 0.3s ease-in;
   }
 }
