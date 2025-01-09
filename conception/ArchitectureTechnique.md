@@ -33,103 +33,70 @@ Afin de visualiser clairement la structure du projet, ci-dessous un schéma d'or
 ```mermaid
 graph TD
     root[backend]
-    root --> server[glassfish-server]
-    root --> common[common-module]
-    root --> services[services]
-    root --> deployment[deployment]
+    root --> common[shared-models]
+    root --> activity[activity]
+    root --> goals[goals]
+    root --> stats[stats]
+    root --> notifications[notifications]
+    
 ```
 
 ---
 
-#### 2. **Détails du serveur**
-```mermaid
-graph TD
-    server[glassfish-server]
-    server --> domain[domains]
-    server --> config[server-config]
-    
-    domain --> domain1[domain1]
-    domain1 --> configDir[config]
-    domain1 --> appsDir[applications]
-    domain1 --> libDir[lib]
-    
-    configDir --> domainXml[domain.xml]
-    configDir --> loggingProps[logging.properties]
-    configDir --> securityPolicy[server.policy]
-    
-    config --> glassfishWeb[glassfish-web.xml]
-    config --> webXml[web.xml]
-    config --> persistenceXml[persistence.xml]
-    config --> resources[glassfish-resources.xml]
-```
 
----
 
-#### 3. **Module commun**
+#### 2. **Module commun**
 ```mermaid
 graph TD
     common[common-module]
-    common --> sharedConfig[config]
-    common --> security[security]
-    common --> utils[utils]
+    common --> src[src]
+    common --> target[target]
+    common --> pom.xml[pom.xml]
+
     
-    sharedConfig --> db[database]
-    sharedConfig --> kafka[kafka]
-    sharedConfig --> firebase[firebase]
-    
-    security --> auth[auth]
-    security --> jwt[jwt]
-    security --> realm[glassfish-realm]
-    
-    realm --> realmConfig[realm-config.xml]
-    realm --> loginConfig[login.conf]
-    
-    utils --> helpers[helpers]
-    utils --> validators[validators]
+
 ```
 
 ---
 
-#### 4. **Services**
+#### 3. **Services**
 ```mermaid
 graph TD
-    services[services]
-    services --> activity[activity-service]
-    services --> goals[goals-service]
-    services --> notification[notification-service]
-    services --> statistics[statistics-service]
-    
-    activity --> activityWar[activity.war]
-    goals --> goalsWar[goals.war]
-    notification --> notifWar[notification.war]
-    statistics --> aggWar[statistics.war]
-    
-    activityWar --> activityWebInf[WEB-INF]
-    activityWebInf --> activityClasses[classes]
-    activityWebInf --> activityLib[lib]
-    activityWebInf --> activityConfig[config]
-    
-    activityClasses --> controller[controller]
-    activityClasses --> service[service]
-    activityClasses --> repository[repository]
-    activityClasses --> model[model]
-    activityClasses --> dto[dto]
+    A[activity] --> B[target]
+    B --> C[activity.war]
+    A --> D[src]
+    D --> E[main]
+    E --> F[java]
+    F --> G[com]
+    G --> H[example]
+    H --> I[activities]
+    I --> J[repository]
+    I --> K[model]
+    I --> L[service]
+    I --> M[controller]
+    E --> N[resources]
+    N --> O[META-INF]
+    O --> P[persistence.xml]
+    A --> Q[pom.xml]
 ```
 
 ---
+### Choix Technologiques
 
-#### 5. **Détails du déploiement**
-```mermaid
-graph TD
-    deployment[deployment]
-    deployment --> docker[docker]
-    deployment --> k8s[kubernetes]
-    deployment --> scripts[scripts]
-```
+- **Jakarta EE 10** : Framework principal
+  - Jakarta Persistence (JPA) pour la couche d'accès aux données
+  - Jakarta RESTful Web Services (JAX-RS) pour les API REST
+  - Jakarta Context and Dependency Injection (CDI) pour l'injection de dépendances
+  - Jakarta Bean Validation pour la validation des données
+- **Maven** : Gestion des dépendances et build
+- **PostgreSQL 15** : Base de données relationnelle
+- **Apache Kafka** : Message broker pour la communication inter-services
 
 ---
 
 #### Service d’Activités
+
+
 1. L'utilisateur commence par saisir les détails de son activité dans l'interface mobile ou web.
 
 2. Le frontend transforme cette saisie en une requête POST structurée et l'envoie au Service d'Activités. Cette requête contient toutes les informations nécessaires comme le type d'activité, la durée, les calories, etc.
@@ -174,6 +141,45 @@ erDiagram
         DATETIME activity_date
     }
 ```
+
+**Technologies Spécifiques**:
+- Jakarta Persistence avec Hibernate comme provider
+- Repository pattern pour l'accès aux données
+- DTO pattern pour la transformation des données
+
+**Structure Maven**:
+```
+activity-service/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/gofit/activity/
+│   │   │       ├── controller/
+│   │   │       ├── service/
+│   │   │       ├── repository/
+│   │   │       ├── model/
+│   │   │       └── dto/
+│   │   └── resources/
+│   │       └── META-INF/
+│   │           ├── persistence.xml
+│   │           └── beans.xml
+└── pom.xml
+```
+
+**Exemple de Configuration JPA (persistence.xml)**:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence">
+    <persistence-unit name="ActivityPU" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:app/jdbc/ActivityDS</jta-data-source>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+```
 #### Service des Objectifs
 - **Création d'un objectif** : Lorsque l'utilisateur définit un nouvel objectif via l'interface mobile ou web, l'objectif est envoyé via une requête HTTP (POST) au Service des Objectifs (GS). Ce service enregistre l'objectif dans la base de données SQLite. Une fois l'enregistrement effectué, un événement "goal.created" est publié sur Kafka pour informer les autres services du système de cette création.
 
@@ -198,6 +204,29 @@ erDiagram
             Front-->>User: Affiche confirmation
         end
 ```
+
+**Technologies Spécifiques**:
+- Jakarta Enterprise Beans (EJB) pour la logique métier
+- Jakarta Scheduler pour les vérifications périodiques
+- Events CDI pour la communication interne
+
+**Structure des Packages**:
+```java
+com.gofit.goals
+├── controller
+│   └── GoalController.java
+├── service
+│   ├── GoalService.java
+│   └── GoalScheduler.java
+├── repository
+│   └── GoalRepository.java
+├── model
+│   └── Goal.java
+└── event
+    ├── GoalCreatedEvent.java
+    └── GoalAchievedEvent.java
+```
+
 - **Suivi des objectifs** : À intervalles réguliers, le service des objectifs vérifie si un objectif a été atteint. Si tel est le cas, il met à jour l'état de l'objectif dans la base de données et publie un événement "goal.achieved" sur Kafka.
 
 ```mermaid
@@ -275,6 +304,20 @@ erDiagram
 
 
 ```
+
+**Technologies Spécifiques**:
+- Jakarta WebSocket pour les notifications temps réel
+- Jakarta Mail pour les notifications par email
+- Kafka Consumer pour la réception des événements
+
+**Configuration Kafka**:
+```properties
+bootstrap.servers=localhost:9092
+group.id=notification-service
+enable.auto.commit=true
+key.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+```
 #### Service de Statistiques
 - **Mise à jour des statistiques** : Le Service de Statistiques (SS) reçoit des notifications via Kafka lorsque des événements pertinents se produisent, comme la création d'une activité ou l'atteinte d'un objectif. Il met à jour les statistiques dans la base de données SQLite en fonction des nouvelles données.
 
@@ -327,8 +370,67 @@ erDiagram
     }
 
 ```
+**Technologies Spécifiques**:
+- Jakarta Batch pour le traitement des données
+- Jakarta Persistence avec des requêtes optimisées
+- Materialized Views PostgreSQL pour les agrégations
 
 
-### Choix Technologiques
 ### Deploiement
+- **Serveur d'Application** : GlassFish
+- **Base de Données** : PostgreSQL 15
+- **Message Broker** : Apache Kafka 3.4
+
+
+### Scripts de Déploiement
+```bash
+#!/bin/bash
+# deploy.sh
+mvn clean package
 ## Front-End
+### Technologies Utilisées
+- **HTML5** : Structure des pages
+- **CSS3** avec Flexbox et Grid
+- **JavaScript** (ES6+)
+  - Fetch API pour les appels REST
+  - WebSocket pour les notifications temps réel
+  - LocalStorage pour le cache local
+```
+### Structure du Front-End
+```
+frontend/
+├── assets/
+│   ├── css/
+│   │   ├── style.css
+│   │   └── components/
+│   ├── js/
+│   │   ├── main.js
+│   │   └── services/
+│   └── images/
+├── components/
+│   ├── activity/
+│   ├── goals/
+│   └── stats/
+└── index.html
+```
+
+### Exemple de Service JavaScript
+```javascript
+class ActivityService {
+    static async createActivity(activityData) {
+        try {
+            const response = await fetch('/api/activities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(activityData)
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error creating activity:', error);
+            throw error;
+        }
+    }
+}
+```
