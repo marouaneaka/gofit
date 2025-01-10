@@ -1,0 +1,472 @@
+<!DOCTYPE html><html><head>
+      <title>Architecture Technique</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\Marbel\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.15\crossnote\dependencies\katex\katex.min.css">
+      
+      
+      <script type="text/javascript" src="file:///c:\Users\Marbel\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.8.15\crossnote\dependencies\mermaid\mermaid.min.js" charset="UTF-8"></script>
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<img src="img/logo.jpg" alt="Logo" width="100" height="100">
+<h1 id="dossier-darchitecture-technique">Dossier d’Architecture Technique </h1>
+<h2 id="introduction">Introduction </h2>
+<p>Ce document présente l’architecture technique de l’application de suivi de fitness, décrivant les choix technologiques, les diagrammes de flux de données, les spécifications des composants, et la manière dont elle sera déployée.</p>
+<ul>
+<li><strong>Nom du projet</strong> : <strong>Gofit</strong></li>
+<li><strong>Objectif</strong> :  Créer un système de suivi de fitness qui permet à un utilisateur de suivre ses activités physiques, de définir des objectifs de fitness, et de visualiser ses progrès au fil du temps. Ce système sera accessible via une application mobile et un tableau de bord web, offrant une expérience utilisateur complète et intuitive.</li>
+<li><strong>Plateforme</strong> : Web</li>
+<li><strong>Projet crée par</strong> : Marouane BELBELLA</li>
+<li><strong>Cas d'utilisations</strong> :
+<ul>
+<li>Un seul utilisateur sur l'application</li>
+<li>Enregistrer et suivre ses activités physiques.</li>
+<li>Définir des objectifs de fitness personnalisés.</li>
+<li>Visualiser ses progrès au fil du temps.</li>
+<li>Recevoir des notifications et des rappels pour rester motivés et sur la bonne voie</li>
+</ul>
+</li>
+</ul>
+<h2 id="back-end">Back-End </h2>
+<h3 id="architecture-globale">Architecture Globale </h3>
+<p>L’application de suivi de fitness repose sur une architecture à base de microservices. Chaque service est conçu pour être indépendant et se concentrer sur une fonctionnalité spécifique.</p>
+<p>Les principaux microservices sont :</p>
+<ol>
+<li>Service d’Activités : Gère l’enregistrement, la mise à jour et la suppression des activités.</li>
+<li>Service des Objectifs : Gère la création, le suivi et la mise à jour des objectifs de fitness.</li>
+<li>Service de Notifications : Gère l’envoi des notifications push et email.</li>
+<li>Service de Statistiques : Centralise les données pour les statistiques et les rapports affichés sur le tableau de bord.</li>
+</ol>
+<p>Afin de visualiser clairement la structure du projet, ci-dessous un schéma d'organisation des fichiers du backend</p>
+<h4 id="1-structure-principale">1. <strong>Structure principale</strong> </h4>
+<div class="mermaid">graph TD
+    root[backend]
+    root --&gt; common[shared-models]
+    root --&gt; activity[activity]
+    root --&gt; goals[goals]
+    root --&gt; stats[stats]
+    root --&gt; notifications[notifications]
+    
+</div><h4 id="2-module-commun">2. <strong>Module commun</strong> </h4>
+<div class="mermaid">graph TD
+    common[shared-models]
+    common --&gt; src[src]
+    common --&gt; target[target]
+    common --&gt; pom.xml[pom.xml]
+
+    
+
+</div><h4 id="3-services">3. <strong>Services</strong> </h4>
+<div class="mermaid">graph TD
+    A[activity] --&gt; B[target]
+    B --&gt; C[activity.war]
+    A --&gt; D[src]
+    D --&gt; E[main]
+    E --&gt; F[java]
+    F --&gt; G[com]
+    G --&gt; H[gofits]
+    H --&gt; I[activities]
+    I --&gt; J[repository]
+    I --&gt; K[model]
+    I --&gt; L[kafka]
+    I --&gt; L[rest]
+    I --&gt; M[config]
+    E --&gt; N[resources]
+    N --&gt; O[META-INF]
+    O --&gt; P[persistence.xml]
+    A --&gt; Q[pom.xml]
+</div><h3 id="choix-technologiques">Choix Technologiques </h3>
+<ul>
+<li><strong>Jakarta EE 10</strong> : Framework principal
+<ul>
+<li>Jakarta Persistence (JPA) pour la couche d'accès aux données</li>
+<li>Jakarta RESTful Web Services (JAX-RS) pour les API REST</li>
+<li>Jakarta Context and Dependency Injection (CDI) pour l'injection de dépendances</li>
+<li>Jakarta Bean Validation pour la validation des données</li>
+</ul>
+</li>
+<li><strong>Maven</strong> : Gestion des dépendances et build</li>
+<li><strong>PostgreSQL 15</strong> : Base de données relationnelle</li>
+<li><strong>Apache Kafka</strong> : Message broker pour la communication inter-services</li>
+</ul>
+<h4 id="service-dactivités">Service d’Activités </h4>
+<ol>
+<li>
+<p>L'utilisateur commence par saisir les détails de son activité dans l'interface mobile ou web.</p>
+</li>
+<li>
+<p>Le frontend transforme cette saisie en une requête POST structurée et l'envoie au Service d'Activités. Cette requête contient toutes les informations nécessaires comme le type d'activité, la durée, les calories, etc.</p>
+</li>
+<li>
+<p>Le Service d'Activités effectue deux actions importantes en parallèle :</p>
+<ul>
+<li>Il persiste les données dans la base de données SQLite pour un stockage permanent</li>
+<li>Il publie un événement sur Kafka pour informer les autres services de cette nouvelle activité</li>
+</ul>
+</li>
+<li>
+<p>Une fois ces opérations terminées, une confirmation est renvoyée à l'utilisateur à travers l'interface.</p>
+</li>
+</ol>
+<div class="mermaid">sequenceDiagram
+    participant User as Utilisateur
+    participant Front as Frontend (Web)
+    participant AS as Service d'Activités
+    participant DB as Base de Données SQLite
+    participant Kafka as Message Broker Kafka
+
+    
+    %% Flux d'enregistrement d'activité
+    rect rgb(38, 61, 81)
+        Note over User,Kafka: Processus d'enregistrement d'activité
+        User-&gt;&gt;Front: Saisit une nouvelle activité
+        Front-&gt;&gt;+AS: POST /activities
+        AS-&gt;&gt;DB: Enregistre l'activité
+        DB--&gt;&gt;AS: Confirmation
+        AS-&gt;&gt;Kafka: Publie événement "activity.created"
+        AS--&gt;&gt;-Front: 201 Created
+        Front--&gt;&gt;User: Affiche confirmation
+    end
+</div><ul>
+<li>La base de données pour le service des activités contient les informations relatives aux activités physiques enregistrées par l'utilisateur.</li>
+</ul>
+<div class="mermaid">erDiagram
+    ACTIVITIES {
+        INT id PK
+        STRING activity_type
+        FLOAT duration
+        FLOAT lost_calories
+        FLOAT gained_calories
+        DATETIME activity_date
+    }
+</div><p><strong>Technologies Spécifiques</strong>:</p>
+<ul>
+<li>Jakarta Persistence avec Hibernate comme provider</li>
+<li>Repository pattern pour l'accès aux données</li>
+<li>DTO pattern pour la transformation des données</li>
+</ul>
+<p><strong>Structure Maven</strong>:</p>
+<pre data-role="codeBlock" data-info="" class="language-text"><code>activity-service/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/gofit/activity/
+│   │   │       ├── controller/
+│   │   │       ├── service/
+│   │   │       ├── repository/
+│   │   │       ├── model/
+│   │   │       └── dto/
+│   │   └── resources/
+│   │       └── META-INF/
+│   │           ├── persistence.xml
+│   │           └── beans.xml
+└── pom.xml
+</code></pre><p><strong>Exemple de Configuration JPA (persistence.xml)</strong>:</p>
+<pre data-role="codeBlock" data-info="xml" class="language-xml xml"><code><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>persistence</span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3.0<span class="token punctuation">"</span></span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://jakarta.ee/xml/ns/persistence<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>persistence-unit</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ActivityPU<span class="token punctuation">"</span></span> <span class="token attr-name">transaction-type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>JTA<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>provider</span><span class="token punctuation">&gt;</span></span>org.hibernate.jpa.HibernatePersistenceProvider<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>provider</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jta-data-source</span><span class="token punctuation">&gt;</span></span>java:app/jdbc/ActivityDS<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jta-data-source</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hibernate.dialect<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.hibernate.dialect.PostgreSQLDialect<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>hibernate.hbm2ddl.auto<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>update<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>persistence-unit</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>persistence</span><span class="token punctuation">&gt;</span></span>
+</code></pre><h4 id="service-des-objectifs">Service des Objectifs </h4>
+<ul>
+<li><strong>Création d'un objectif</strong> : Lorsque l'utilisateur définit un nouvel objectif via l'interface mobile ou web, l'objectif est envoyé via une requête HTTP (POST) au Service des Objectifs (GS). Ce service enregistre l'objectif dans la base de données SQLite. Une fois l'enregistrement effectué, un événement "goal.created" est publié sur Kafka pour informer les autres services du système de cette création.</li>
+</ul>
+<div class="mermaid">    sequenceDiagram
+        participant User as Utilisateur
+        participant Front as Frontend (Web)
+        participant GS as Service des Objectifs
+        participant DB as Base de Données SQLite
+        participant Kafka as Message Broker Kafka
+        participant NS as Service de Notifications
+        
+        %% Création d'un nouveau objectif
+        rect rgb(38, 81, 52)
+            Note over GS,User: Création d'un nouveau objectif
+            User-&gt;&gt;Front: Saisit un nouveau objectif
+            Front-&gt;&gt;+GS: POST /objectives
+            GS-&gt;&gt;DB: Enregistre l'objectif
+            DB--&gt;&gt;GS: Confirmation
+            GS-&gt;&gt;Kafka: Publie événement "goal.created"
+            GS--&gt;&gt;-Front: 201 Created
+            Front--&gt;&gt;User: Affiche confirmation
+        end
+</div><p><strong>Technologies Spécifiques</strong>:</p>
+<ul>
+<li>Jakarta Enterprise Beans (EJB) pour la logique métier</li>
+<li>Jakarta Scheduler pour les vérifications périodiques</li>
+<li>Events CDI pour la communication interne</li>
+</ul>
+<p><strong>Structure des Packages</strong>:</p>
+<pre data-role="codeBlock" data-info="java" class="language-java java"><code>com<span class="token punctuation">.</span>gofit<span class="token punctuation">.</span>goals
+├── controller
+│   └── <span class="token class-name">GoalController</span><span class="token punctuation">.</span>java
+├── service
+│   ├── <span class="token class-name">GoalService</span><span class="token punctuation">.</span>java
+│   └── <span class="token class-name">GoalScheduler</span><span class="token punctuation">.</span>java
+├── repository
+│   └── <span class="token class-name">GoalRepository</span><span class="token punctuation">.</span>java
+├── model
+│   └── <span class="token class-name">Goal</span><span class="token punctuation">.</span>java
+└── event
+    ├── <span class="token class-name">GoalCreatedEvent</span><span class="token punctuation">.</span>java
+    └── <span class="token class-name">GoalAchievedEvent</span><span class="token punctuation">.</span>java
+</code></pre><ul>
+<li><strong>Suivi des objectifs</strong> : À intervalles réguliers, le service des objectifs vérifie si un objectif a été atteint. Si tel est le cas, il met à jour l'état de l'objectif dans la base de données et publie un événement "goal.achieved" sur Kafka.</li>
+</ul>
+<div class="mermaid">    sequenceDiagram
+        participant GS as Service des Objectifs
+        participant DB as Base de Données SQLite
+        participant Kafka as Message Broker Kafka
+        
+        %% Verification objectif atteint
+        rect rgb(38, 81, 52)
+            Note over GS: Processus de suivi des objectifs
+            GS-&gt;&gt;GS: Vérifie les progrès des objectifs
+            GS-&gt;&gt;DB: Change l'état de l'objectif
+            GS-&gt;&gt;Kafka: Publie événement "goal.achieved"
+        end
+</div><ul>
+<li>La base de données pour le service des objectifs contient les informations relatives aux objectifs définis par l'utilisateur.</li>
+</ul>
+<div class="mermaid">erDiagram
+    OBJECTIVES {
+        INT id PK
+        STRING goal_type
+        FLOAT goal_value
+        DATETIME start_date
+        DATETIME end_date
+        BOOLEAN achieved
+    }
+
+</div><h4 id="service-de-notifications">Service de Notifications </h4>
+<ol>
+<li>
+<p>Le Service d'Objectifs analyse régulièrement les progrès par rapport aux objectifs fixés.</p>
+</li>
+<li>
+<p>Lorsqu'un objectif est atteint, il publie immédiatement un événement sur Kafka.</p>
+</li>
+<li>
+<p>Le Service de Notifications, qui écoute en permanence ces événements :</p>
+<ul>
+<li>Capture l'événement "goal.achieved"</li>
+<li>Le transforme en notification appropriée</li>
+<li>L'envoie au Front</li>
+</ul>
+</li>
+<li>
+<p>Le Front affiche la notification à l'utilisateur.</p>
+</li>
+</ol>
+<div class="mermaid">sequenceDiagram
+    participant User as Utilisateur
+    participant Front as Frontend (Web)
+
+    participant Kafka as Message Broker Kafka
+    participant GS as Service d'Objectifs
+    participant NS as Service de Notifications
+    participant DB as Base de Données SQLite
+
+    
+    
+    %% Flux de notification d'objectif atteint
+    rect rgb(108, 92, 73)
+        Note over GS,User: Processus de notification
+        GS-&gt;&gt;GS: Vérifie objectifs
+        GS-&gt;&gt;Kafka: Publie "goal.achieved"
+        Kafka--&gt;&gt;NS: Consomme événement
+        NS-&gt;&gt;DB: Enregistrement sur BD
+        NS-&gt;&gt;Front: Envoie notification push
+        Front--&gt;&gt;User: Reçoit notification
+    end
+</div><ul>
+<li>La base de données pour le service des notifications stocke les informations liées aux notifications envoyées à l'utilisateur.</li>
+</ul>
+<div class="mermaid">erDiagram
+    NOTIFICATIONS {
+        INT id PK
+        STRING notification_type
+        STRING message
+        DATETIME timestamp
+    }
+
+
+</div><p><strong>Technologies Spécifiques</strong>:</p>
+<ul>
+<li>Jakarta WebSocket pour les notifications temps réel</li>
+<li>Kafka Consumer pour la réception des événements</li>
+</ul>
+<p><strong>Configuration Kafka</strong>:</p>
+<pre data-role="codeBlock" data-info="properties" class="language-properties properties"><code><span class="token key attr-name">bootstrap.servers</span><span class="token punctuation">=</span><span class="token value attr-value">localhost:9092</span>
+<span class="token key attr-name">group.id</span><span class="token punctuation">=</span><span class="token value attr-value">notification-service</span>
+<span class="token key attr-name">enable.auto.commit</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
+<span class="token key attr-name">key.deserializer</span><span class="token punctuation">=</span><span class="token value attr-value">org.apache.kafka.common.serialization.StringDeserializer</span>
+<span class="token key attr-name">value.deserializer</span><span class="token punctuation">=</span><span class="token value attr-value">org.apache.kafka.common.serialization.StringDeserializer</span>
+</code></pre><h4 id="service-de-statistiques">Service de Statistiques </h4>
+<ul>
+<li><strong>Mise à jour des statistiques</strong> : Le Service de Statistiques (SS) reçoit des notifications via Kafka lorsque des événements pertinents se produisent, comme la création d'une activité ou l'atteinte d'un objectif. Il met à jour les statistiques dans la base de données SQLite en fonction des nouvelles données.</li>
+</ul>
+<div class="mermaid">sequenceDiagram
+    participant SS as Service de Statistiques
+    participant DB as Base de Données SQLite
+    participant Kafka as Message Broker Kafka
+    
+    %% Flux de mise à jour des statistiques
+    rect rgb(108, 74, 73)
+        Note over SS,User: Processus de mise à jour des statistiques
+        Kafka-&gt;&gt;SS: Notifie sur un nouveau évenement 
+        SS-&gt;&gt;DB: Met à jour les statistiques
+        DB--&gt;&gt;SS: Confirmation de la mise à jour
+        SS-&gt;&gt;Kafka: Publie événement "statistics.updated"
+
+    end
+</div><ul>
+<li><strong>Affichage des statistiques</strong> : Le frontend, lorsqu'il souhaite afficher les statistiques actualisées, interroge le Service des Statistiques pour récupérer les données mises à jour. Le service renvoie les informations de manière structurée et l'interface utilisateur les affiche en temps réel.</li>
+</ul>
+<div class="mermaid">sequenceDiagram
+    participant User as Utilisateur
+    participant Front as Frontend (Web)
+    participant SS as Service de Statistiques
+    
+    %% Flux de données affichage statistiques
+    rect rgb(108, 74, 73)
+        Note over SS,User: Flux de données affichage statistiques
+        Front--&gt;&gt;SS: Récuperation données
+        SS--&gt;&gt;Front: Données statistiques
+        Front--&gt;&gt;User: Affiche les statistiques mises à jour
+    end
+</div><ul>
+<li>La base de données pour le service des statistiques contient des informations agrégées sur les performances de l'utilisateur, comme la somme des calories brûlées ou la durée totale des activités.</li>
+</ul>
+<div class="mermaid">erDiagram
+    STATISTICS {
+        FLOAT total_duration
+        FLOAT total_calories_gained
+        FLOAT total_calories_lost
+        FLOAT total_distance
+        FLOAT mean_daily_distance
+        FLOAT mean_daily_duration
+        DATETIME update_date PK
+    }
+
+</div><p><strong>Technologies Spécifiques</strong>:</p>
+<ul>
+<li>Jakarta Batch pour le traitement des données</li>
+<li>Jakarta Persistence avec des requêtes optimisées</li>
+<li>Materialized Views PostgreSQL pour les agrégations</li>
+</ul>
+<h3 id="deploiement">Deploiement </h3>
+<ul>
+<li><strong>Serveur d'Application</strong> : GlassFish</li>
+<li><strong>Base de Données</strong> : PostgreSQL 15</li>
+<li><strong>Message Broker</strong> : Apache Kafka 3.4</li>
+</ul>
+<h3 id="déploiement">Déploiement </h3>
+<p><a href="mise_en_place.md">mise_en_place</a></p>
+<h3 id="structure-du-front-end">Structure du Front-End </h3>
+<pre data-role="codeBlock" data-info="plaintext" class="language-plaintext plaintext"><code>frontend/
+├── assets/
+│   ├── favicon.ico
+│   └── logo.jpg
+├── css/
+│   └── styles.css
+├── js/
+│   ├── activities.js
+│   ├── main.js
+│   ├── notifications.js
+│   ├── objectives.js
+│   └── statistics.js
+├── activities.html
+├── index.html
+├── navbar.html
+├── notifications.html
+├── objectives.html
+└── statistics.html
+</code></pre><h3 id="exemple-de-service-javascript">Exemple de Service JavaScript </h3>
+<pre data-role="codeBlock" data-info="javascript" class="language-javascript javascript"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">ActivityService</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-async">async</span> <span class="token function">createActivity</span><span class="token punctuation">(</span><span class="token parameter">activityData</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword control-flow keyword-try">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-const">const</span> response <span class="token operator">=</span> <span class="token keyword control-flow keyword-await">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'/api/activities'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+                <span class="token literal-property property">method</span><span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">headers</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token string-property property">'Content-Type'</span><span class="token operator">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token literal-property property">body</span><span class="token operator">:</span> <span class="token known-class-name class-name">JSON</span><span class="token punctuation">.</span><span class="token method function property-access">stringify</span><span class="token punctuation">(</span>activityData<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword control-flow keyword-return">return</span> <span class="token keyword control-flow keyword-await">await</span> response<span class="token punctuation">.</span><span class="token method function property-access">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword control-flow keyword-catch">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token console class-name">console</span><span class="token punctuation">.</span><span class="token method function property-access">error</span><span class="token punctuation">(</span><span class="token string">'Error creating activity:'</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword control-flow keyword-throw">throw</span> error<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      </div>
+      
+      
+    
+    
+    <script type="module">
+// TODO: If ZenUML gets integrated into mermaid in the future,
+//      we can remove the following lines.
+
+
+var MERMAID_CONFIG = ({"startOnLoad":false});
+if (typeof MERMAID_CONFIG !== 'undefined') {
+  MERMAID_CONFIG.startOnLoad = false
+  MERMAID_CONFIG.cloneCssStyles = false
+  MERMAID_CONFIG.theme = "default"
+}
+
+mermaid.initialize(MERMAID_CONFIG || {})
+if (typeof(window['Reveal']) !== 'undefined') {
+  function mermaidRevealHelper(event) {
+    var currentSlide = event.currentSlide
+    var diagrams = currentSlide.querySelectorAll('.mermaid')
+    for (var i = 0; i < diagrams.length; i++) {
+      var diagram = diagrams[i]
+      if (!diagram.hasAttribute('data-processed')) {
+        mermaid.init(null, diagram, ()=> {
+          Reveal.slide(event.indexh, event.indexv)
+        })
+      }
+    }
+  }
+  Reveal.addEventListener('slidetransitionend', mermaidRevealHelper)
+  Reveal.addEventListener('ready', mermaidRevealHelper)
+  await mermaid.run({
+    nodes: document.querySelectorAll('.mermaid')
+  })
+} else {
+  await mermaid.run({
+    nodes: document.querySelectorAll('.mermaid')
+  })
+}
+</script>
+    
+    
+    
+  
+    </body></html>
