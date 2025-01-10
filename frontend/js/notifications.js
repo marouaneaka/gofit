@@ -2,7 +2,7 @@
 
 // --------------- Notifications ----------------
 
-// Fonction pour charger les notifications (objectifs complétés)
+// Fonction pour charger les notifications
 async function loadNotifications() {
     const errorElement = document.getElementById('notificationsError');
     const loadingIndicator = document.getElementById('loadingIndicator');
@@ -12,27 +12,24 @@ async function loadNotifications() {
     notificationsList.innerHTML = ''; // Réinitialiser les notifications affichées
 
     try {
-        // Récupérer tous les objectifs
-        const getUrl = 'http://localhost:8080/objectives-service/objectives';
+        // Récupérer toutes les notifications
+        const getUrl = 'http://localhost:8080/notifications-service/notifications';
         const getResponse = await fetch(getUrl);
 
         if (!getResponse.ok) {
-            throw new Error('Erreur lors de la récupération des objectifs: ' + getResponse.status);
+            throw new Error('Erreur lors de la récupération des notifications: ' + getResponse.status);
         }
 
         const data = await getResponse.json(); // data est un tableau d'objets
-        console.log('Objectifs:', data);
+        console.log('Notifications:', data);
 
-        // Filtrer les objectifs avec le statut COMPLETED
-        const completedObjectives = data.filter(objective => objective.status === 'COMPLETED');
-
-        if (completedObjectives.length === 0) {
+        if (data.length === 0) {
             notificationsList.innerHTML = `<p>Aucune notification disponible.</p>`;
         } else {
-            completedObjectives.forEach(objective => {
+            data.forEach(notification => {
                 const message = `
-                    <p>🎉 Objectif "${capitalizeFirstLetter(objective.goalType)}" atteint ! 
-                    Cible : ${objective.targetValue}, Date de fin : ${objective.endDate}</p>
+                    <p>🎉 ${notification.message} 
+                    Type : ${notification.notificationType}, Date : ${new Date(notification.timestamp).toLocaleString()}</p>
                 `;
                 notificationsList.innerHTML += message;
             });
@@ -50,4 +47,3 @@ function capitalizeFirstLetter(string) {
     if (typeof string !== 'string') return '';
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
-
