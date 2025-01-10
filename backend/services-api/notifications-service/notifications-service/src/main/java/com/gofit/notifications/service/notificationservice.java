@@ -1,28 +1,31 @@
 package com.gofit.notifications.service;
 
-import com.gofit.notifications.model.Objective;
-import com.gofit.notifications.repository.ObjectiveRepository;
+import com.gofit.notifications.model.Notification;
+import com.gofit.notifications.repository.NotificationRepository;
+
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-
 import java.util.List;
 
 @Stateless
-public class notificationservice {
+public class NotificationService {
 
     @Inject
-    private ObjectiveRepository repository;
+    private NotificationRepository notificationRepository;
 
-    public void createObjective(Objective objective) {
-        repository.save(objective);
+    public void createNotification(Notification notification) {
+        notificationRepository.save(notification);
     }
 
-    public Objective getObjective(Long id) {
-        return repository.findById(id);
+    public List<Notification> getAllNotifications() {
+        return notificationRepository.findAll();
     }
 
-    public List<Objective> getAllnotifications() {
-        return repository.findAll();
+    public Notification getNotificationById(Long id) {
+        return notificationRepository.findById(id);
+    }
+
+    public boolean deleteNotification(Long id) {
+        return notificationRepository.delete(id);
     }
 }
-

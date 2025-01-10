@@ -313,7 +313,6 @@ erDiagram
 
 **Technologies Spécifiques**:
 - Jakarta WebSocket pour les notifications temps réel
-- Jakarta Mail pour les notifications par email
 - Kafka Consumer pour la réception des événements
 
 **Configuration Kafka**:
